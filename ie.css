@@ -1,0 +1,23 @@
+#startmenu
+{
+	background-image: url(images/startmenu_bj.png);
+	background-color: transparent;
+}
+
+
+#programs a:hover
+{
+	background-image: url(images/After.png);
+}
+
+
+#links a:hover
+{
+	border: solid 1px #000;
+	-webkit-border-radius: 3px;
+	box-shadow: 0 0 1px #ffffff;
+	-webkit-box-shadow: inset 0 0 1px #ffffff;
+	background-image: url(images/After_r.png);
+	width: 120px;
+	display: block;
+}

@@ -1,0 +1,1972 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Windows模拟判题系统</title>
+    <link href="win7style.css" type="text/css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/screenProtect.css">
+    <!--[if gte IE 8]>
+    <link href="ie.css" type="text/css" rel="stylesheet"/>
+    <![endif]-->
+    <script src="jquery-1.11.1.min.js"></script>
+    <script src="js/three.min.js"></script>
+    <script src="js/tween.min.js"></script>
+    <script src="js/TrackballControls.js"></script>
+    <script src="js/CSS3DRenderer.js"></script>    <script type="text/javascript">
+
+        function MM_jumpMenu(targ, selObj, restore) { //v3.0
+            eval(targ + ".location='" + selObj.options[selObj.selectedIndex].value + "'");
+            if (restore) selObj.selectedIndex = 0;
+        }
+    </script>
+</head>
+<body style="overflow:hidden">
+
+<form>
+    <div align="center"><input type="BUTTON" name="FullScreen" value="全屏显示"
+                               onClick="window.open(document.location, 'butong_net', 'fullscreen')">
+
+    </div>
+</form>
+<div id="win">
+    <ul id="app">
+        <li><a href="#" class="Computer" ondblclick="addClass(Computer)">
+            <img src="images/computer.png"><br/>
+            计算机</a></li>
+        <li><a href="#" class="recycle">
+            <img src="images/recycle.png"><br/>
+            回收站</a></li>
+        <li><a href="#" class="network">
+            <img src="images/network.png"><br/>
+            网络</a></li>
+        <li><a href="#" class="network">
+            <img src="images/ie.png"><br/>
+            浏览器</a></li>
+    </ul>
+</div>
+<div id="taskbar">
+    <a href="#" id="start"></a>
+    <a href="https://hao.360.cn/?src=lm&ls=n4abc0a4199" style="left: 60px">
+        <img src="images/ie.png"/>
+    </a>
+    <a href="#" style="left: 120px">
+        <img src="images/library.png" id="Folder"/>
+    </a>
+    <a href="#" style="left: 180px">
+        <img src="images/mp.png"/>
+    </a>
+    <a href="#" style="left: 240px">
+        <img src="images/live.png"/>
+    </a>
+    <a href="#" style="left: 300px">
+        <img src="images/outlook.png"/>
+    </a>
+    <div id="desktop"></div>
+</div>
+<div id="menuwin">
+    <div id="startmenu"></div>
+    <ul id="programs" style="height: 387px;
+    overflow-y: scroll">
+        <li><a href="">
+            <img src="images/ie.png"/>Internet Explorer</a></li>
+        <li><a href="#">
+            <img src="images/mc.png"/>Microsoft Media Center</a></li>
+        <li>
+            <div id="leftspliter"></div>
+        </li>
+        <li id="word"><a href="#">
+            <img src="images/word.png"/>Microsoft Word 2010</a></li>
+        <li><a href="#">
+            <img src="images/excel.png"/>Microsoft Excel 2010</a></li>
+        <li><a href="#">
+            <img src="images/powerpoint.png"/>Microsoft PowerPoint 2010</a></li>
+        <li><a href="#">
+            <img src="images/access.png"/>Microsoft Access 2010</a></li>
+        <li><a href="#">
+            <img src="images/update.png"/>Windows Update</a></li>
+        <li>
+            <div id="leftspliter"></div>
+        </li>
+        <li id="allProgram" ><a href="#">
+            <img src="images/narrow.png"/>所有程序</a></li>
+        <li id="menuBackward" ><a href="#">
+            <img src="images/narrow.png"/>返回</a></li>
+        <li style="background:#EDF2F9; height: 45px; border-radius: 3px;border-top:3px solid #CCD9EA;position: absolute;top: 345px;">
+            <input id='serInpu' type="text" placeholder="搜索程序和文件"/>
+        </li>
+    </ul>
+    <ul id="links">
+        <li class="icon">
+            <img src="images/user.png"/></li>
+        <li><a href="#"><span>文档</span></a></li>
+        <li><a href="#"><span>图片</span></a></li>
+        <li><a href="#"><span>音乐</span></a></li>
+        <li>
+            <div id="rightspliter"></div>
+        </li>
+        <li><a href="#"><span>游戏</span></a></li>
+        <li><a href="#" class="Computer"><span>计算机</span></a></li>
+        <li>
+            <div id="rightspliter"></div>
+        </li>
+        <li id="ctrlPanel"><a href="#"><span>控制面板</span></a></li>
+        <li><a href="#"><span>设备和打印机</span></a></li>
+        <li><a href="#"><span>默认程序</span></a></li>
+    </ul>
+</div>
+
+<!--右键菜单-->
+<div id="taskbarbg_menu">
+    <ul>
+        <li><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp工具栏<img src="images/sub_menu.png" align="right"/></a>
+            <ul>
+                <li><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp地址(A)</a></li>
+                <li><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp链接(L)</a></li>
+                <li><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp桌面(D)</a></li>
+                <li><a href="#"><input name="" type="checkbox" value="" checked>
+                    &nbsp语言栏</a></li>
+                <li><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp新建工具栏(N)</a></li>
+            </ul>
+        </li>
+        <div class="menuline"></div>
+        <li><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp层叠窗口(D)</a></li>
+        <li><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp堆叠显示窗口(T)</a></li>
+        <li><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp并排显示窗口(I)</a></li>
+        <li><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp显示桌面(S)</a></li>
+        <div class="menuline"></div>
+        <li><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp启动任务管理器(K)</a></li>
+        <div class="menuline"></div>
+        <li><a href="#"><input name="" type="checkbox" value="" checked>&nbsp&nbsp锁定任务栏(L)</a></li>
+        <li><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp属性(R)</a></li>
+    </ul>
+</div>
+
+<div id="start_menu">
+    <ul>
+        <li><a href="#" class="test12" ondblclick="addClass(test12)">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp属性(R)</a></li>
+        <li><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp打开Windows资源管理器(P)</a></li>
+    </ul>
+</div>
+
+<div id="Display_menu">
+    <ul>
+        <li><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp查看(V)<img src="images/sub_menu.png" align="right"/></a>
+            <ul>
+                <li><a href="#"><input name="Icon" type="radio" disabled="disabled" value="Large"/>&nbsp&nbsp&nbsp;大图标(R)</a>
+                </li>
+                <li><a href="#"><input name="Icon" type="radio" value="Medium" checked="checked"/>&nbsp&nbsp&nbsp中等图标(M)</a>
+                </li>
+                <li><a href="#"><input name="Icon" type="radio" disabled="disabled" value="Small"/>&nbsp&nbsp&nbsp;小图标(N)</a>
+                </li>
+                <div class="menuline"></div>
+                <li><a href="#"><input name="" type="checkbox" value="" checked>&nbsp&nbsp&nbsp自动排列图标(A)</a></li>
+                <li><a href="#"><input name="" type="checkbox" value="" checked>&nbsp&nbsp&nbsp将图标与网格对齐(I)</a></li>
+                <div class="menuline"></div>
+                <li><a href="#"><input name="" type="checkbox" value="" checked>&nbsp&nbsp&nbsp显示桌面图标(D)</a></li>
+            </ul>
+        </li>
+        <li><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp排序方式(O)<img src="images/sub_menu.png" align="right"/></a>
+            <ul>
+                <li id="sortName"><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp名称</a></li>
+                <li><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp大小</a></li>
+                <li><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp项目类型</a></li>
+                <li><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp修改日期</a></li>
+            </ul>
+        </li>
+        <li id="refresh"><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp刷新(E)</a></li>
+        <div class="menuline"></div>
+        <li class="paste"><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp粘贴(P)</a></li>
+        <li><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp粘贴快捷方式(S)</a></li>
+        <li><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp撤销&nbsp删除(U)</a></li>
+        <div class="menuline"></div>
+        <li><a href="#"><img src="images/NVIDIA.png" align="left" height="16" width="16"/>&nbsp&nbsp&nbsp;NVIDIA控制面板</a>
+        </li>
+        <div class="menuline"></div>
+        <li><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp新建<img src="images/sub_menu.png" align="right"/></a>
+            <ul>
+                <li><a href="#"><img src="images/Folder.png" align="left" height="16" width="16"/>&nbsp&nbsp&nbsp文件夹</a>
+                </li>
+                <li><a href="#"><img src="images/Folder.png" align="left" height="16"
+                                     width="16"/>&nbsp&nbsp&nbsp快捷方式</a></li>
+                <li><a href="#"><img src="images/NVIDIA.png" align="left" height="16" width="16"/>&nbsp&nbsp&nbsp;BMP图像</a>
+                </li>
+                <li><a href="#"><img src="images/NVIDIA.png" align="left" height="16" width="16"/>&nbsp&nbsp&nbsp联系人</a>
+                </li>
+                <li><a href="#"><img src="images/NVIDIA.png" align="left" height="16"
+                                     width="16"/>&nbsp&nbsp&nbsp文本文档</a></li>
+                <li><a href="#"><img src="images/NVIDIA.png" align="left" height="16" width="16"/>&nbsp&nbsp&nbsp公文包</a>
+                </li>
+            </ul>
+        </li>
+        <div class="menuline"></div>
+        <li><a href="#"><img src="images/Resolution.png" align="left" height="16"
+                             width="16"/>&nbsp&nbsp&nbsp屏幕分辨率(C)</a></li>
+        <li><a href="#"><img src="images/Gadget.png" align="left" height="16" width="16"/>&nbsp&nbsp&nbsp小工具(G)</a></li>
+        <li><a href="#"><img src="images/Individualization.png" align="left" height="18" width="16"/>&nbsp&nbsp&nbsp个性化(R)</a>
+        </li>
+    </ul>
+</div>
+
+<div id="Computer_menu">
+    <ul>
+        <li><a href="#" class="Computer">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp打开(O)</a></li>
+        <li><a href="#"><a href="#"><img src="images/Administration.png" align="left" height="16" width="16"/>&nbsp&nbsp&nbsp管理(G)</a>
+        </li>
+        <div class="menuline"></div>
+        <li><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp映射网络驱动器(N)...</a></li>
+        <li><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp断开网络驱动器(C)...</a></li>
+        <div class="menuline"></div>
+        <li><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp创建快捷方式(S)</a></li>
+        <li><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp删除(D)</a></li>
+        <li><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp重命名(M)</a></li>
+        <div class="menuline"></div>
+        <li><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp属性(R)</a></li>
+    </ul>
+</div>
+
+<div id="recycle_menu">
+    <ul>
+        <li><a href="#" class="recycle">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp打开(O)</a></li>
+        <li><a href="#"><a href="#" class="recycle_Eliminate_all"><img src="images/recycle_16.png" align="left"
+                                                                       height="16"
+                                                                       width="16"/>&nbsp&nbsp&nbsp清空回收站(B)</a></li>
+        <div class="menuline"></div>
+        <li><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp创建快捷方式(S)</a></li>
+
+        <li><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp重命名(M)</a></li>
+        <div class="menuline"></div>
+        <li><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp属性(R)</a></li>
+    </ul>
+</div>
+
+<div id="network_menu">
+    <ul>
+        <li><a href="#" class="network">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp打开(O)</a></li>
+        <div class="menuline"></div>
+        <li><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp映射网络驱动器(N)...</a></li>
+        <li><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp断开网络驱动器(C)...</a></li>
+        <div class="menuline"></div>
+        <li><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp创建快捷方式(S)</a></li>
+        <li><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp删除(D)</a></li>
+        <div class="menuline"></div>
+        <li id="netProp"><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp属性(R)</a></li>
+    </ul>
+</div>
+
+<div id="D_menu">
+    <ul>
+        <li><a href="#" class="Open_dir">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp打开(O)</a></li>
+        <li><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp在新窗口中打开(E)</a></li>
+        <div class="menuline"></div>
+        <li><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp共享(H)<img src="images/sub_menu.png" align="right"/></a>
+            <ul>
+                <li><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp不共享</a></li>
+                <li><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp家庭组（读取）</a></li>
+                <li><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp家庭组（读取/写入）</a></li>
+                <li><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp特定用户.....</a></li>
+            </ul>
+        </li>
+        <div class="menuline"></div>
+        <li><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp发送到(N)<img src="images/sub_menu.png" align="right"/></a>
+            <ul>
+                <li><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp桌面快捷方式</a></li>
+                <li><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp文档</a></li>
+            </ul>
+        </li>
+        <div class="menuline"></div>
+        <li><a href="#" class="Shear">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp剪切(T)</a></li>
+        <li><a href="#" class="D_copy">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp复制(C)</a></li>
+        <div class="menuline"></div>
+        <li><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp创建快捷方式(S)</a></li>
+        <li><a href="#" class="Del_file">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp删除(D)</a></li>
+        <li><a href="#" class="Rename_file">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp重命名(M)</a></li>
+        <div class="menuline"></div>
+        <li><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp属性(R)</a></li>
+    </ul>
+</div>
+
+<div id="recycle_D_menu">
+    <ul>
+        <li><a href="#" class="recycle_reduction">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp还原(E)</a></li>
+        <div class="menuline"></div>
+        <li><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp剪切(T)</a></li>
+        <div class="menuline"></div>
+        <li><a href="#" class="recycle_Eliminate">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp删除(D)</a></li>
+        <div class="menuline"></div>
+        <li><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp属性(R)</a></li>
+    </ul>
+</div>
+
+<div id="computer_r_menu" data-code="4">
+    <ul>
+        <li data-code="4-查看"><a href="#">查看(V)<img src="images/sub_menu.png" align="right"/></a>
+            <ul>
+                <li data-code="4-查看-超大图标"><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp超大图标(X)</a></li>
+                <li data-code="4-查看-大图标"><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp大图标(R)</a></li>
+                <li data-code="4-查看-中等图标"><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp中等图标(M)</a></li>
+                <li data-code="4-查看-小图标"><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp小图标(N)</a></li>
+                <li data-code="4-查看-列表"><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp列表(L)</a></li>
+                <li data-code="4-查看-详细信息"><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp详细信息(D)</a></li>
+                <li data-code="4-查看-平铺"><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp平铺(S)</a></li>
+                <li data-code="4-查看-内容"><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp内容(T)</a></li>
+            </ul>
+        </li>
+        <li data-code="4-排序方式"><a href="#">排序方式(O)<img src="images/sub_menu.png" align="right"/></a>
+            <ul>
+                <li data-code="4-排序方式-名称"><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp名称</a></li>
+                <li data-code="4-排序方式-修改日期"><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp修改日期</a></li>
+                <li data-code="4-排序方式-类型"><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp类型</a></li>
+                <li data-code="4-排序方式-大小"><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp大小</a></li>
+                <li data-code="4-排序方式-递增"><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp递增(A)</a></li>
+                <li data-code="4-排序方式-递减"><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp递减(D)</a></li>
+                <li data-code="4-排序方式-更多"><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp更多(M)</a></li>
+            </ul>
+        </li>
+        <div class="menuline"></div>
+        <li data-code="4-分组依据"><a href="#">分组依据(P)<img src="images/sub_menu.png" align="right"/></a>
+            <ul>
+                <li data-code="4-分组依据-名称"><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp名称</a></li>
+                <li data-code="4-分组依据-修改日期"><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp修改日期</a></li>
+                <li data-code="4-分组依据-类型"><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp类型</a></li>
+                <li data-code="4-分组依据-大小"><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp大小</a></li>
+                <li data-code="4-分组依据-递增"><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp递增(A)</a></li>
+                <li data-code="4-分组依据-递减"><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp递减(D)</a></li>
+                <li data-code="4-分组依据-更多"><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp更多(M)</a></li>
+            </ul>
+        </li>
+        <div class="menuline"></div>
+        <li data-code="4-刷新"><a href="#">刷新(E)</a></li>
+        <li data-code="4-自定义文件夹"><a href="#">自定义文件夹...(F)</a></li>
+        <div class="menuline"></div>
+        <li data-code="4-粘贴" class="paste"><a href="#" class="Paste">粘贴(P)</a></li>
+        <li data-code="4-粘贴快捷方式"><a href="#">粘贴快捷方式(S)</a></li>
+        <div class="menuline"></div>
+        <li id="newOne" data-code="4-新建"><a href="#">新建(W)<img src="images/sub_menu.png" align="right"/></a>
+            <ul>
+                <li id="newDir" data-code="4-新建-文件夹"><a href="#" class="New_dir">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp文件夹(F)</a></li>
+                <li data-code="4-新建-快捷方式"><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp快捷方式(S)</a></li>
+                <div class="menuline"></div>
+                <li id="newText" data-code="4-新建-文本文档"><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp文本文档</a></li>
+                <li data-code="4-新建-联系人"><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp联系人</a></li>
+                <li data-code="4-新建-公文包"><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp公文包</a></li>
+            </ul>
+        </li>
+        <li data-code="4-属性"><a href="#">属性(R)</a></li>
+    </ul>
+</div>
+
+
+<div id="F_menu">
+    <ul>
+        <li><a href="#" class="Open_file">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp打开(O)</a></li>
+        <div class="menuline"></div>
+        <li><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp共享(H)<img src="images/sub_menu.png" align="right"/></a>
+            <ul>
+                <li><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp不共享</a></li>
+                <li><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp家庭组（读取）</a></li>
+                <li><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp家庭组（读取/写入）</a></li>
+                <li><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp特定用户.....</a></li>
+            </ul>
+        </li>
+        <div class="menuline"></div>
+        <li><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp发送到(N)<img src="images/sub_menu.png" align="right"/></a>
+            <ul>
+                <li><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp桌面快捷方式</a></li>
+                <li><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp文档</a></li>
+            </ul>
+        </li>
+        <div class="menuline"></div>
+        <li><a href="#" class="Shear">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp剪切(T)</a></li>
+        <li><a href="#" class="D_copy">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp复制(C)</a></li>
+        <div class="menuline"></div>
+        <li><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp创建快捷方式(S)</a></li>
+        <li><a href="#" class="Del_file">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp删除(D)</a></li>
+        <li><a href="#" class="Rename_file">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp重命名(M)</a></li>
+        <div class="menuline"></div>
+        <li><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp属性(R)</a></li>
+    </ul>
+</div>
+<!--计算机选中盘符右键菜单栏-->
+<div id="comSelet_menu" data-code="5">
+    <ul>
+        <li id="openItem" data-code="5-打开"><a href="#">打开(O)</a></li>
+        <li data-code="5-在新窗口打开"><a href="#">在新窗口打开(E)</a></li>
+        <div class="menuline"></div>
+        <li data-code="5-共享">
+            <a href="#">
+                共享(H)
+                <img src="images/sub_menu.png" align="right"/>
+            </a>
+            <ul>
+                <li data-code="5-共享-高级共享"><a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp高级共享...</a></li>
+            </ul>
+        </li>
+        <li data-code="5-还原以前的版本"><a href="#">还原以前版本(V)</a></li>
+        <div class="menuline"></div>
+        <li data-code="5-添加到压缩文件"><a href="#">添加到压缩文件(A)...</a></li>
+        <li data-code="5-添加到'Archive.rar'"><a href="#">添加到"Archive.rar"(T)</a></li>
+        <li data-code="5-压缩并E-mail"><a href="#">压缩并E-mail...</a></li>
+        <li data-code="5-添加到'Archive.rar'并E-mail"><a href="#">添加到"Archive.rar"并E-mail</a></li>
+        <div class="menuline"></div>
+        <li data-code="5-格式化"><a href="#">格式化(A)...</a></li>
+        <div class="menuline"></div>
+        <li id="copy" data-code="5-复制"><a href="#">复制(C)...</a></li>
+        <div class="menuline"></div>
+        <li data-code="5-创建快捷方式"><a href="#">创建快捷方式(S)</a></li>
+        <li id="delete" data-code="5-删除"><a href="#">删除(D)</a></li>
+        <li data-code="5-重命名"><a href="#">重命名(M)</a></li>
+        <div class="menuline"></div>
+        <li data-code="5-属性"><a href="#">属性(R)</a></li>
+    </ul>
+</div>
+
+<!--计算机窗口-->
+<div id="Computer_windows" class="moveBar" name="windows">
+    <div id="Computer_windows_banner"></div>
+    <div class='windows_lt'></div>
+    <div class='windows_rt'></div>
+    <div class='windows_lb'></div>
+    <div class='windows_rb'></div>
+    <div class="windows_shadow"></div>
+
+    <div class="Goback">
+        <ul>
+            <li id='Computer_back'></li>
+            <li id='Computer_go'></li>
+        </ul>
+    </div>
+    <div class="address_bar"><input name="address_txt" type="text" value="计算机" id="address_txt"/></div>
+    <div class="Search_bar">
+        <input name="Search_txt" type="text" value="搜索计算机" id="Search_txt"/></div>
+
+    <div class="Content">
+        <!--<div class="navigation_pane" >-->
+
+            <!--<div class="left_main">-->
+                <!--<div class="leftblankline"></div>-->
+                <!--<div class="leftbox">-->
+                    <!--<div class="leftbox_t"></div>-->
+                    <!--<div class="leftbox_title"><a href="#" onclick="showmenu(1);"><img src="images/Collection.png"  align ="left" height="16" width="16" />收藏夹</a></div>-->
+                    <!--<div class="leftbox_m menu1" >-->
+                        <!--<div class="leftblankline"></div>-->
+                        <!--<div class="leftbox" style="padding-left: 16px;">-->
+                            <!--<div class="leftbox_t"></div>-->
+                            <!--<div class="leftbox_title"><a href="#" onclick=""><img src="images/Collection.png"  align ="left" height="16" width="16" />收藏夹</a></div>-->
+                            <!--<div class="leftbox_m" id="menu1">      </div>-->
+                        <!--</div>-->
+                        <!--<div class="leftblankline"></div>-->
+                        <!--<div class="leftbox" style="padding-left: 16px;">-->
+                            <!--<div class="leftbox_t"></div>-->
+                            <!--<div class="leftbox_title"><a href="#" onclick=""><img src="images/Collection.png"  align ="left" height="16" width="16" />收藏夹</a></div>-->
+                            <!--<div class="leftbox_m" id="menu1">                    </div>-->
+                        <!--</div>-->
+                        <!--<div class="leftblankline"></div>-->
+                        <!--<div class="leftbox" style="padding-left: 16px;">-->
+                            <!--<div class="leftbox_t"></div>-->
+                            <!--<div class="leftbox_title"><a href="#" onclick=""><img src="images/Collection.png"  align ="left" height="16" width="16" />收藏夹</a></div>-->
+                            <!--<div class="leftbox_m" id="menu1">                    </div>-->
+                        <!--</div>-->
+
+                        <!--&lt;!&ndash;<ul>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<li><img src="images/Download.png"  align ="left" height="16" width="16" />下载</li>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<li><img src="images/Desktop.png"  align ="left" height="16" width="16" />桌面</li>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<li><img src="images/Recently.png"  align ="left" height="16" width="16" />最近访问的位置</li>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <div class="navigation_pane">
+
+            <div class="left_main">
+                <div class="leftblankline"></div>
+                <div class="leftbox">
+                    <div class="leftbox_t"></div>
+                    <div class="leftbox_title"><a href="#" onclick="showmenu(1);"><img src="images/Collection.png"
+                                                                                       align="left" height="16"
+                                                                                       width="16"/>收藏夹</a></div>
+                    <div class="leftbox_m" id="menu1">
+                        <ul>
+                            <li><img src="images/Download.png" align="left" height="16" width="16"/>下载</li>
+                            <li><img src="images/Desktop.png" align="left" height="16" width="16"/>桌面</li>
+                            <li><img src="images/Recently.png" align="left" height="16" width="16"/>最近访问的位置</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="leftblankline"></div>
+                <div class="leftbox">
+                    <div class="leftbox_t"></div>
+                    <div class="leftbox_title"><a href="#" onclick="showmenu(2);"><img src="images/library.png"
+                                                                                       align="left" height="16"
+                                                                                       width="16"/>库</a></div>
+                    <div class="leftbox_m" id="menu2">
+                        <ul>
+                            <li><img src="images/Video.png" align="left" height="16" width="16"/>视频</li>
+                            <li><img src="images/picture.png" align="left" height="16" width="16"/>图片</li>
+                            <li><img src="images/File.png" align="left" height="16" width="16"/>文档</li>
+                            <li><img src="images/Music.png" align="left" height="16" width="16"/>音乐</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="leftblankline"></div>
+                <div class="leftbox">
+                    <div class="leftbox_t"></div>
+                    <div class="leftbox_title"><a href="#" onclick="showmenu(3);"><img src="images/computer.png"
+                                                                                       align="left" height="16"
+                                                                                       width="16"/>计算机</a></div>
+                    <div class="leftbox_m" id="menu3">
+                        <ul>
+                            <li><img src="images/disk.png" align="left" height="16" width="16"/>本地磁盘（C:）</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="leftblankline"></div>
+                <div class="leftbox">
+                    <div class="leftbox_t"></div>
+                    <div class="leftbox_title"><a href="#" onclick="showmenu(4);"><img src="images/network.png"
+                                                                                       align="left" height="16"
+                                                                                       width="16"/>网络</a></div>
+                    <div class="leftbox_m" id="menu4">
+                        <ul>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div id="computer_r" class="right_main">
+
+
+        </div>
+
+        <ul>
+            <li>组织
+                <ul>
+                    <li class="Shear">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp剪切</li>
+                    <li class="D_copy">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp复制</li>
+                    <li class="paste">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp粘贴</li>
+                    <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp撤销</li>
+                    <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp恢复</li>
+                    <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp全选</li>
+                    <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp布局<img src="images/sub_menu.png" align="right"/>
+                        <ul>
+                            <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp菜单栏</li>
+                            <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp细节窗格</li>
+                            <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp预览窗格</li>
+                            <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp导航窗格</li>
+                        </ul>
+                    </li>
+                    <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp文件夹和搜索选项</li>
+                    <li class="Del_file">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp删除</li>
+                    <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp重命名</li>
+                    <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp删除属性</li>
+                    <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp属性</li>
+                    <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp关闭</li>
+                </ul>
+            </li>
+            <li>系统属性</li>
+            <li>卸载或更改程序</li>
+            <li>映射网络驱动器</li>
+            <li>打开控制面板</li>
+        </ul>
+
+
+    </div>
+    <div class="onbutton">
+        <ul>
+            <li class='Minimization' onclick="min(this)"><a href="#"></a></li>
+            <li class='Reduction' onclick="Reduction(this)"><a href="#"></a></li>
+            <li class='Close' onclick="Close(this)"><a href="#"></a></li>
+        </ul>
+    </div>
+</div>
+
+<!--回收站窗口-->
+<div id="recycle_windows" class="moveBar" name="windows">
+    <div id="recycle_windows_banner"></div>
+    <div class='windows_lt'></div>
+    <div class='windows_rt'></div>
+    <div class='windows_lb'></div>
+    <div class='windows_rb'></div>
+    <div class="windows_shadow"></div>
+    <div class="Goback">
+        <ul>
+            <li class='go'></li>
+            <li class='back'></li>
+        </ul>
+    </div>
+    <div class="address_bar"><input name="recycle_txt" type="text" value="回收站" id="recycle_txt"/></div>
+    <div class="Search_bar">
+        <input name="Search_recycle_txt" type="text" value="搜索回收站" id="Search_recycle_txt"/></div>
+
+    <div class="Content">
+        <div class="navigation_pane">
+
+            <div class="left_main">
+                <div class="leftblankline"></div>
+                <div class="leftbox">
+                    <div class="leftbox_t"></div>
+                    <div class="leftbox_title"><a href="#" onclick="showmenu(5);"><img src="images/Collection.png"
+                                                                                       align="left" height="16"
+                                                                                       width="16"/>收藏夹</a></div>
+                    <div class="leftbox_m" id="menu5">
+                        <ul>
+                            <li><img src="images/Download.png" align="left" height="16" width="16"/>下载</li>
+                            <li><img src="images/Desktop.png" align="left" height="16" width="16"/>桌面</li>
+                            <li><img src="images/Recently.png" align="left" height="16" width="16"/>最近访问的位置</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="leftblankline"></div>
+                <div class="leftbox">
+                    <div class="leftbox_t"></div>
+                    <div class="leftbox_title"><a href="#" onclick="showmenu(6);"><img src="images/library.png"
+                                                                                       align="left" height="16"
+                                                                                       width="16"/>库</a></div>
+                    <div class="leftbox_m" id="menu6">
+                        <ul>
+                            <li><img src="images/Video.png" align="left" height="16" width="16"/>视频</li>
+                            <li><img src="images/picture.png" align="left" height="16" width="16"/>图片</li>
+                            <li><img src="images/File.png" align="left" height="16" width="16"/>文档</li>
+                            <li><img src="images/Music.png" align="left" height="16" width="16"/>音乐</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="leftblankline"></div>
+                <div class="leftbox">
+                    <div class="leftbox_t"></div>
+                    <div class="leftbox_title"><a href="#" onclick="showmenu(7);"><img src="images/computer.png"
+                                                                                       align="left" height="16"
+                                                                                       width="16"/>计算机</a></div>
+                    <div class="leftbox_m" id="menu7">
+                        <ul>
+                            <li><img src="images/disk.png" align="left" height="16" width="16"/>本地磁盘（C:）</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="leftblankline"></div>
+                <div class="leftbox">
+                    <div class="leftbox_t"></div>
+                    <div class="leftbox_title"><a href="#" onclick="showmenu(8);"><img src="images/network.png"
+                                                                                       align="left" height="16"
+                                                                                       width="16"/>网络</a></div>
+                    <div class="leftbox_m" id="menu8">
+                        <ul>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div id="recycle_r" class="right_main">
+
+        </div>
+
+        <ul>
+            <li>组织
+                <ul>
+                    <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp剪切</li>
+                    <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp复制</li>
+                    <li class="paste">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp粘贴</li>
+                    <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp撤销</li>
+                    <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp恢复</li>
+                    <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp全选</li>
+                    <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp布局<img src="images/sub_menu.png" align="right"/>
+                        <ul>
+                            <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp菜单栏</li>
+                            <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp细节窗格</li>
+                            <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp预览窗格</li>
+                            <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp导航窗格</li>
+                        </ul>
+                    </li>
+                    <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp文件夹和搜索选项</li>
+
+                    <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp删除</li>
+                    <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp重命名</li>
+                    <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp删除属性</li>
+                    <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp属性</li>
+                    <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp关闭</li>
+                </ul>
+            </li>
+            <li class="recycle_Eliminate_all">清空回收站</li>
+            <li class="recycle_reduction_all">还原所有项目</li>
+        </ul>
+
+    </div>
+    <div class="onbutton">
+        <ul>
+            <li class='Minimization' onclick="min(this)"><a href="#"></a></li>
+            <li class='Reduction' onclick="Reduction(this)"><a href="#"></a></li>
+            <li class='Close' onclick="Close(this)"><a href="#"></a></li>
+        </ul>
+    </div>
+</div>
+
+<!--网络窗口-->
+<div id="network_windows" class="moveBar" name="windows">
+    <div id="network_windows_banner"></div>
+    <div class='windows_lt'></div>
+    <div class='windows_rt'></div>
+    <div class='windows_lb'></div>
+    <div class='windows_rb'></div>
+    <div class="windows_shadow"></div>
+    <div class="Goback">
+        <ul>
+            <li class='go'></li>
+            <li class='back'></li>
+        </ul>
+    </div>
+    <div class="address_bar"><input name="network_txt" type="text" value="网络" id="network_txt"/></div>
+    <div class="Search_bar">
+        <input name="Search_network_txt" type="text" value="搜索网络" id="Search_network_txt"/></div>
+
+    <div class="Content">
+        <div class="navigation_pane">
+
+            <div class="left_main">
+                <div class="leftblankline"></div>
+                <div class="leftbox">
+                    <div class="leftbox_t"></div>
+                    <div class="leftbox_title"><a href="#" onclick="showmenu(9);"><img src="images/Collection.png"
+                                                                                       align="left" height="16"
+                                                                                       width="16"/>收藏夹</a></div>
+                    <div class="leftbox_m" id="menu9">
+                        <ul>
+                            <li><img src="images/Download.png" align="left" height="16" width="16"/>下载</li>
+                            <li><img src="images/Desktop.png" align="left" height="16" width="16"/>桌面</li>
+                            <li><img src="images/Recently.png" align="left" height="16" width="16"/>最近访问的位置</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="leftblankline"></div>
+                <div class="leftbox">
+                    <div class="leftbox_t"></div>
+                    <div class="leftbox_title"><a href="#" onclick="showmenu(10);"><img src="images/library.png"
+                                                                                        align="left" height="16"
+                                                                                        width="16"/>库</a></div>
+                    <div class="leftbox_m" id="menu10">
+                        <ul>
+                            <li><img src="images/Video.png" align="left" height="16" width="16"/>视频</li>
+                            <li><img src="images/picture.png" align="left" height="16" width="16"/>图片</li>
+                            <li><img src="images/File.png" align="left" height="16" width="16"/>文档</li>
+                            <li><img src="images/Music.png" align="left" height="16" width="16"/>音乐</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="leftblankline"></div>
+                <div class="leftbox">
+                    <div class="leftbox_t"></div>
+                    <div class="leftbox_title"><a href="#" onclick="showmenu(11);"><img src="images/computer.png"
+                                                                                        align="left" height="16"
+                                                                                        width="16"/>计算机</a></div>
+                    <div class="leftbox_m" id="menu11">
+                        <ul>
+                            <li><img src="images/disk.png" align="left" height="16" width="16"/>本地磁盘（C:）</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="leftblankline"></div>
+                <div class="leftbox">
+                    <div class="leftbox_t"></div>
+                    <div class="leftbox_title"><a href="#" onclick="showmenu(12);"><img src="images/network.png"
+                                                                                        align="left" height="16"
+                                                                                        width="16"/>网络</a></div>
+                    <div class="leftbox_m" id="menu12">
+                        <ul>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <ul>
+            <li>组织
+                <ul>
+                    <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp剪切</li>
+                    <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp复制</li>
+                    <li class="paste">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp粘贴</li>
+                    <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp撤销</li>
+                    <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp恢复</li>
+                    <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp全选</li>
+                    <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp布局<img src="images/sub_menu.png" align="right"/>
+                        <ul>
+                            <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp菜单栏</li>
+                            <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp细节窗格</li>
+                            <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp预览窗格</li>
+                            <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp导航窗格</li>
+                        </ul>
+                    </li>
+                    <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp文件夹和搜索选项</li>
+                    <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp删除</li>
+                    <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp重命名</li>
+                    <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp删除属性</li>
+                    <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp属性</li>
+                    <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp关闭</li>
+                </ul>
+            </li>
+            <li>网络和共享中心</li>
+            <li>添加打印机</li>
+            <li>添加无线设备</li>
+        </ul>
+
+    </div>
+    <div class="onbutton">
+        <ul>
+            <li class='Minimization' onclick="min(this)"><a href="#"></a></li>
+            <li class='Reduction' onclick="Reduction(this)"><a href="#"></a></li>
+            <li class='Close' onclick="Close(this)"><a href="#"></a></li>
+        </ul>
+    </div>
+</div>
+
+<!--开始属性--><!--自定义窗口示例-->
+<div id="startProp_windows" class="moveBar" name="windows">
+    <div id="startProp_windows_banner"></div>
+    <div class='windows_lt'></div>
+    <div class='windows_rt'></div>
+    <div class='windows_lb'></div>
+    <div class='windows_rb'></div>
+    <div class="windows_shadow"></div>
+    <div class="Content">
+        <ul id="props_toolBar">
+            <!--    <li data-target="prop_startBar">任务栏</li>
+                <li data-target="prop_startMenu">开始菜单</li>
+                <li data-target="prop_toolBar">工具栏</li>-->
+        </ul>
+        <div id="props_detail">
+
+            <!--<div id="prop_startMenu"></div>
+            <div id="prop_toolBar"></div>-->
+        </div>
+        <div style="position: absolute;bottom: 0;right: 0;">
+            <button>确认</button>
+            <button>取消</button>
+            <button>应用</button>
+        </div>
+
+    </div>
+    <div class="onbutton">
+        <ul>
+            <li class='Minimization' onclick="min(this)"><a href="#"></a></li>
+            <li class='Reduction' onclick="Reduction(this)"><a href="#"></a></li>
+            <li class='Close' onclick="Close(this)"><a href="#"></a></li>
+        </ul>
+    </div>
+</div>
+<!--开始属性--><!--自定义窗口示例-->
+<div id="time"></div>
+
+<!--网络属性-->
+<div id="network_prop" class="moveBar" name="windows">
+    <div id="network_prop_banner"></div>
+    <div class='windows_lt'></div>
+    <div class='windows_rt'></div>
+    <div class='windows_lb'></div>
+    <div class='windows_rb'></div>
+    <div class="windows_shadow"></div>
+    <div class="Goback">
+        <ul>
+            <li class='go'></li>
+            <li class='back'></li>
+        </ul>
+    </div>
+    <div class="address_bar"><input name="network_txt" type="text" value="网络" id="network_txt"/></div>
+    <div class="Search_bar">
+        <input name="Search_network_txt" type="text" value="搜索网络" id="Search_network_txt"/></div>
+
+    <div class="Content">
+        <div class="navigation_pane">
+
+            <div class="left_main">
+                <div class="leftblankline"></div>
+                <div class="leftbox">
+                    <div class="leftbox_t"></div>
+                    <div class="leftbox_title"><a href="#" onclick="showmenu(9);"><img src="images/Collection.png"
+                                                                                       align="left" height="16"
+                                                                                       width="16"/>收藏夹</a></div>
+                    <div class="leftbox_m" id="menu9">
+                        <ul>
+                            <li><img src="images/Download.png" align="left" height="16" width="16"/>下载</li>
+                            <li><img src="images/Desktop.png" align="left" height="16" width="16"/>桌面</li>
+                            <li><img src="images/Recently.png" align="left" height="16" width="16"/>最近访问的位置</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="leftblankline"></div>
+                <div class="leftbox">
+                    <div class="leftbox_t"></div>
+                    <div class="leftbox_title"><a href="#" onclick="showmenu(10);"><img src="images/library.png"
+                                                                                        align="left" height="16"
+                                                                                        width="16"/>库</a></div>
+                    <div class="leftbox_m" id="menu10">
+                        <ul>
+                            <li><img src="images/Video.png" align="left" height="16" width="16"/>视频</li>
+                            <li><img src="images/picture.png" align="left" height="16" width="16"/>图片</li>
+                            <li><img src="images/File.png" align="left" height="16" width="16"/>文档</li>
+                            <li><img src="images/Music.png" align="left" height="16" width="16"/>音乐</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="leftblankline"></div>
+                <div class="leftbox">
+                    <div class="leftbox_t"></div>
+                    <div class="leftbox_title"><a href="#" onclick="showmenu(11);"><img src="images/computer.png"
+                                                                                        align="left" height="16"
+                                                                                        width="16"/>计算机</a></div>
+                    <div class="leftbox_m" id="menu11">
+                        <ul>
+                            <li><img src="images/disk.png" align="left" height="16" width="16"/>本地磁盘（C:）</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="leftblankline"></div>
+                <div class="leftbox">
+                    <div class="leftbox_t"></div>
+                    <div class="leftbox_title"><a href="#" onclick="showmenu(12);"><img src="images/network.png"
+                                                                                        align="left" height="16"
+                                                                                        width="16"/>网络</a></div>
+                    <div class="leftbox_m" id="menu12">
+                        <ul>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <ul>
+            <li>组织
+                <ul>
+                    <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp剪切</li>
+                    <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp复制</li>
+                    <li class="paste">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp粘贴</li>
+                    <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp撤销</li>
+                    <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp恢复</li>
+                    <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp全选</li>
+                    <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp布局<img src="images/sub_menu.png" align="right"/>
+                        <ul>
+                            <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp菜单栏</li>
+                            <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp细节窗格</li>
+                            <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp预览窗格</li>
+                            <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp导航窗格</li>
+                        </ul>
+                    </li>
+                    <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp文件夹和搜索选项</li>
+                    <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp删除</li>
+                    <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp重命名</li>
+                    <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp删除属性</li>
+                    <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp属性</li>
+                    <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp关闭</li>
+                </ul>
+            </li>
+            <li>网络和共享中心</li>
+            <li>添加打印机</li>
+            <li>添加无线设备</li>
+        </ul>
+
+    </div>
+    <div class="onbutton">
+        <ul>
+            <li class='Minimization' onclick="min(this)"><a href="#"></a></li>
+            <li class='Reduction' onclick="Reduction(this)"><a href="#"></a></li>
+            <li class='Close' onclick="Close(this)"><a href="#"></a></li>
+        </ul>
+    </div>
+</div>
+
+<!--控制面板-->
+<div id="control_panel" class="moveBar" name="windows">
+    <div id="control_panel_banner"></div>
+    <div class='windows_lt'></div>
+    <div class='windows_rt'></div>
+    <div class='windows_lb'></div>
+    <div class='windows_rb'></div>
+    <div class="windows_shadow"></div>
+    <div class="Goback">
+        <ul>
+            <li class='go'></li>
+            <li class='back'></li>
+        </ul>
+    </div>
+    <div class="address_bar">
+        <input name="network_txt" type="text" value="控制面板" id="control_txt"/>
+    </div>
+    <div class="Search_bar">
+        <input name="Search_network_txt" type="text" value="搜索控制面板" id="Search_control_panel"/></div>
+    <div id="Content">
+        <div id="ControlBaner">
+            <div class="Left">
+                <div class="BigItem1">
+                    <div class="Item_tu">
+                        <a href="#"><img src="img/safe.png"/></a>
+                    </div>
+                    <div class="Item_text">
+                        <ul>
+                            <li class="Titl"><a href="#">系统和安全</a></li>
+                            <li><a href="#">查看您的计算机状态</a></li>
+                            <li><a href="#">备份您的计算机</a></li>
+                            <li><a href="#">查找并解决问题</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="BigItem3">
+                    <div class="Item_tu">
+                        <a href="#"><img src="img/Internet.png"/></a>
+                    </div>
+                    <div class="Item_text">
+                        <ul>
+                            <li class="Titl"><a href="#">网络和 Internet</a></li>
+                            <li><a href="#">查看网络状态和任务</a></li>
+                            <li><a href="#">选择家庭组合共享选项</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="BigItem5">
+                    <div class="Item_tu">
+                        <a href="#"><img src="img/hark.png"/></a>
+                    </div>
+                    <div class="Item_text">
+                        <ul>
+                            <li class="Titl"><a href="#">硬件和声音</a></li>
+                            <li><a href="#">查看设备和打印机</a></li>
+                            <li><a href="#">添加设备</a></li>
+                            <li><a href="#">连接到投影仪</a></li>
+                            <li><a href="#">调整常用移动设备</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="BigItem7">
+                    <div class="Item_tu">
+                        <a href="#"><img src="img/app.png"/></a>
+                    </div>
+                    <div class="Item_text">
+                        <ul>
+                            <li class="Titl"><a href="#">程序</a></li>
+                            <li><a href="#">卸载程序</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="Right">
+                <div class="BigItem2">
+                    <div class="Item_tu">
+                        <a href="#"><img src="img/counter.png"/></a>
+                    </div>
+                    <div class="Item_text">
+                        <ul>
+                            <li class="Titl" id="Titl_u"><a href="#">用户账户和家庭安全</a></li>
+                            <li><a href="#">添加或删除用户账户</a></li>
+                            <li><a href="#">为所有用户设置家长控制</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="BigItem4">
+                    <div class="Item_tu">
+                        <a href="#"><img src="img/face.png"/></a>
+                    </div>
+                    <div class="Item_text">
+                        <ul>
+                            <li class="Titl" id="Titl_b"><a href="#">外观和个性化</a></li>
+                            <li><a href="#">更改主题</a></li>
+                            <li><a href="#">更改桌面背景</a></li>
+                            <li><a href="#">调整屏幕分辨率</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="BigItem6">
+                    <div class="Item_tu">
+                        <a href="#"><img src="img/clock.png"/></a>
+                    </div>
+                    <div class="Item_text">
+                        <ul>
+                            <li class="Titl"><a href="#">时钟、语言和区域</a></li>
+                            <li><a href="#">更改键盘或其他输入法</a></li>
+                            <li><a href="#">更改显示语言</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="BigItem8">
+                    <div class="Item_tu">
+                        <a href="#"><img src="img/request.png"/></a>
+                    </div>
+                    <div class="Item_text">
+                        <ul>
+                            <li class="Titl"><a href="#">轻松访问</a></li>
+                            <li><a href="#">使用Windows 建议的设置</a></li>
+                            <li><a href="#">优化视频显示</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="onbutton">
+        <ul>
+            <li class='Minimization' onclick="min(this)"><a href="#"></a></li>
+            <li class='Reduction' onclick="Reduction(this)"><a href="#"></a></li>
+            <li class='Close' onclick="Close(this)"><a href="#"></a></li>
+        </ul>
+    </div>
+</div>
+<!--/控制面板-->
+
+<!--用户账户窗口-->
+<div id="userCounter" class="moveBar" name="windows">
+    <div id="userCounter_banner"></div>
+    <div class='windows_lt'></div>
+    <div class='windows_rt'></div>
+    <div class='windows_lb'></div>
+    <div class='windows_rb'></div>
+    <div class="windows_shadow"></div>
+    <div class="Goback">
+        <ul>
+            <li class='go'></li>
+            <li class='back'></li>
+        </ul>
+    </div>
+    <div class="address_bar">
+        <input name="network_txt" type="text" value="用户账户和家庭安全" id="userCounter_txt"/>
+    </div>
+    <div class="Search_bar">
+        <input name="Search_network_txt" type="text" value="搜索控制面板" id="Search_control_panel"/></div>
+
+    <div id="Content">
+        <div class="top_part">
+            <ul class="top_u">
+                <li>文件(F)</li>
+                <li>编辑(E)</li>
+                <li>查看(V)</li>
+                <li>工具(T)</li>
+                <li>帮助(H)</li>
+            </ul>
+        </div>
+        <div class="left_part">
+            <ul>
+                <li><a href="#">控制面板主页</a></li>
+            </ul>
+            <ul>
+                <li><a href="#">系统和安全</a></li>
+                <li><a href="#">网络和 Internet</a></li>
+                <li><a href="#">硬件和声音</a></li>
+                <li><a href="#">程序</a></li>
+                <li>用户账户和家庭安全</li>
+                <li><a href="#">外观和个性化</a></li>
+                <li><a href="#">时钟、语言和区域</a></li>
+                <li><a href="#">轻松访问</a></li>
+            </ul>
+
+        </div>
+        <div class="right_part">
+            <div class="Big_Item" id="Big_tuShu">
+                <div class="Item_tu">
+                    <a href="#">
+                        <img src="images/counter.png"/>
+                    </a>
+                </div>
+                <div class="Item_text">
+                    <p id="Titl_u1"><a href="#">用户账户</a></p>
+                    <ul class="tuShu">
+                        <li>
+                            <a href="#" class="ChangeTu">更改账户图片</a>
+                            <span>&nbsp&nbsp | &nbsp&nbsp</span>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <img src="images/Administration.png" align="left"/>&nbsp添加或删除用户账户
+                            </a>
+                            <span>&nbsp&nbsp | &nbsp&nbsp </span>
+                        </li>
+                        <li>
+                            <a href="#" class="OpenPasWd">更改 Windows 密码</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="ge_wall"></div>
+            </div>
+            <div class="Big_Item">
+                <div class="Item_tu">
+                    <a href="#">
+                        <img src="images/parent.png"/>
+                    </a>
+                </div>
+                <div class="Item_text">
+                    <p><a href="#">家长控制</a></p>
+                    <ul>
+                        <li>
+                            <a><img src="images/Administration.png" align="left"/>&nbsp为所有用户设置家长设置</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="ge_wall"></div>
+            </div>
+            <div class="Big_Item">
+                <div class="Item_tu">
+                    <a href="#">
+                        <img src="images/cardspace.png"/>
+                    </a>
+                </div>
+                <div class="Item_text">
+                    <p><a href="#">Windows CardSpace</a></p>
+                    <ul>
+                        <li>
+                            <a><img src="images/Administration.png" align="left"/>&nbsp管理用于登录到联机服务的信息卡</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="ge_wall"></div>
+            </div>
+            <div class="Big_Item">
+                <div class="Item_tu">
+                    <a href="#">
+                        <img src="images/credentials.png"/>
+                    </a>
+                </div>
+                <div class="Item_text">
+                    <p><a href="#">凭据管理器</a></p>
+                    <ul>
+                        <li>
+                            <a><img src="images/Administration.png" align="left"/>&nbsp管理 Windows 凭据</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="ge_wall"></div>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="onbutton">
+        <ul>
+            <li class='Minimization' onclick="min(this)"><a href="#"></a></li>
+            <li class='Reduction' onclick="Reduction(this)"><a href="#"></a></li>
+            <li class='Close' onclick="Close(this)"><a href="#"></a></li>
+        </ul>
+    </div>
+</div>
+<!--用户账户窗口-->
+
+<!--主题背景-->
+<div id="theme_bg" class="moveBar" name="windows">
+    <div id="theme_bg_banner"></div>
+    <div class='windows_lt'></div>
+    <div class='windows_rt'></div>
+    <div class='windows_lb'></div>
+    <div class='windows_rb'></div>
+    <div class="windows_shadow"></div>
+
+    <div class="Goback">
+        <ul>
+            <li id='Computer_back'></li>
+            <li id='Computer_go'></li>
+        </ul>
+    </div>
+    <div class="address_bar"><input name="address_txt" type="text" value="外观和个性化" id="address_txt"/></div>
+    <div class="Search_bar">
+        <input name="Search_txt" type="text" value="搜索控制面板" id="Search_txt"/></div>
+
+    <div class="Content">
+        <div class="navigation_pane">
+
+            <div class="left_main">
+                <p><a href="javascipt:;">控制面板主页</a></p>
+                <p><a href="javascipt:;">更改桌面图标</a></p>
+                <p><a href="javascipt:;">更改鼠标指针</a></p>
+                <p><a href="javascipt:;">更改账户图片</a></p>
+                <div id="refer">
+                    <p><a href="javascript:;">显示</a></p>
+                    <p><a href="javascript:;">任务栏和开始菜单</a></p>
+                    <p><a href="javascript:;">轻松访问中心</a></p>
+                </div>
+            </div>
+
+
+        </div>
+        <div id="setBg" class="right_main">
+            <p>更改计算机上的视觉效果和声音</p>
+            <span>单击某个主题立即更改桌面背景、窗口颜色、声音和屏幕保护程序</span>
+            <div id="all_theme">
+                <p>我的主题(1)</p>
+                <div class="current_theme" style="">
+                    <span style="position: absolute;bottom: 0;left: 25%;">未保存的主题</span>
+                </div>
+                <div>
+                    <a href="" style="float: right;margin-right: 10px;color: #89C7E8;">联机获取更多主题</a>
+                    <a href="" style="float: right;margin-right: 10px;color: #89C7E8; ">保存主题</a>
+                </div>
+            </div>
+            <div id="theme_detail">
+                <div id="bgc"></div>
+                <div id="win_color"></div>
+                <div id="voice"></div>
+                <div id="screen_protect_program"></div>
+            </div>
+        </div>
+
+        <ul>
+            <li>组织
+                <ul>
+                    <li class="Shear">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp剪切</li>
+                    <li class="D_copy">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp复制</li>
+                    <li class="paste">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp粘贴</li>
+                    <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp撤销</li>
+                    <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp恢复</li>
+                    <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp全选</li>
+                    <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp布局<img src="images/sub_menu.png" align="right"/>
+                        <ul>
+                            <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp菜单栏</li>
+                            <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp细节窗格</li>
+                            <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp预览窗格</li>
+                            <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp导航窗格</li>
+                        </ul>
+                    </li>
+                    <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp文件夹和搜索选项</li>
+                    <li class="Del_file">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp删除</li>
+                    <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp重命名</li>
+                    <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp删除属性</li>
+                    <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp属性</li>
+                    <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp关闭</li>
+                </ul>
+            </li>
+            <li>系统属性</li>
+            <li>卸载或更改程序</li>
+            <li>映射网络驱动器</li>
+            <li>打开控制面板</li>
+        </ul>
+
+
+    </div>
+    <div class="onbutton">
+        <ul>
+            <li class='Minimization' onclick="min(this)"><a href="#"></a></li>
+            <li class='Reduction' onclick="Reduction(this)"><a href="#"></a></li>
+            <li class='Close' onclick="Close(this)"><a href="#"></a></li>
+        </ul>
+    </div>
+</div>
+<!--/主题背景-->
+
+<!--用户账户第一级页面-->
+<div id="userCounter_1" class="moveBar" name="windows">
+    <div id="userCounter_1_banner"></div>
+    <div class='windows_lt'></div>
+    <div class='windows_rt'></div>
+    <div class='windows_lb'></div>
+    <div class='windows_rb'></div>
+    <div class="windows_shadow"></div>
+    <div class="Goback">
+        <ul>
+            <li class='go'></li>
+            <li class='back'></li>
+        </ul>
+    </div>
+    <div class="address_bar">
+        <input name="network_txt" type="text" value="用户账户和家庭安全" id="userCounter_txt"/>
+    </div>
+    <div class="Search_bar">
+        <input name="Search_network_txt" type="text" value="搜索控制面板" id="Search_control_panel"/></div>
+    <div id="Content">
+        <div class="top_part">
+            <ul class="top_u">
+                <li>文件(F)</li>
+                <li>编辑(E)</li>
+                <li>查看(V)</li>
+                <li>工具(T)</li>
+                <li>帮助(H)</li>
+            </ul>
+        </div>
+        <div class="left_part">
+            <ul>
+                <li><a href="#">控制面板主页</a></li>
+            </ul>
+            <ul>
+                <li><a href="#">管理您的凭据</a></li>
+                <li><a href="#">创建密码重设盘</a></li>
+                <li><a href="#">连接联机 ID</a></li>
+                <li><a href="#">管理文件加密证书</a></li>
+                <li><a href="#">配置高级用户配置文件属性</a></li>
+                <li><a href="#">更改我的环境变量</a></li>
+            </ul>
+
+        </div>
+        <div class="right_part">
+            <div class="R_left">
+                <p>更改用户账号</p>
+                <ul>
+                    <li class="OpenPasWd"><a href="#">更改密码</a></li>
+                    <li id="DelPasWd"><a href="#">删除密码</a></li>
+                    <li class="ChangeTu"><a href="#">更改图片</a></li>
+                </ul>
+                <ul class="ul_Sp">
+                    <li><a href="#"><img src="images/Administration.png" align="left"/>&nbsp管理其他账户</a></li>
+                    <li><a href="#"><img src="images/Administration.png" align="left"/>&nbsp更改用户账户控制设置</a></li>
+                </ul>
+            </div>
+            <div class="R_right">
+                <div>
+                    <img src="images/Jane.png"/>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+    <div class="onbutton">
+        <ul>
+            <li class='Minimization' onclick="min(this)"><a href="#"></a></li>
+            <li class='Reduction' onclick="Reduction(this)"><a href="#"></a></li>
+            <li class='Close' onclick="Close(this)"><a href="#"></a></li>
+        </ul>
+    </div>
+</div>
+<!--用户账户第一级页面-->
+
+<!--用户账户-更改密码-->
+<div id="user_passWrd" class="moveBar" name="windows">
+    <div id="user_passWrd_banner"></div>
+    <div class='windows_lt'></div>
+    <div class='windows_rt'></div>
+    <div class='windows_lb'></div>
+    <div class='windows_rb'></div>
+    <div class="windows_shadow"></div>
+    <div class="Goback">
+        <ul>
+            <li class='go'></li>
+            <li class='back'></li>
+        </ul>
+    </div>
+    <div class="address_bar">
+        <input name="network_txt" type="text" value="用户账户和家庭安全" id="userCounter_txt"/>
+    </div>
+    <div class="Search_bar">
+        <input name="Search_network_txt" type="text" value="搜索控制面板" id="Search_control_panel"/></div>
+    <div id="Content">
+        <div class="top_part">
+            <ul class="top_u">
+                <li>文件(F)</li>
+                <li>编辑(E)</li>
+                <li>查看(V)</li>
+                <li>工具(T)</li>
+                <li>帮助(H)</li>
+            </ul>
+        </div>
+        <div class="main_part">
+            <p class="p1">更改密码</p>
+            <img src="images/Jane.png" alt="Hello,Bye!"/>
+            <div class="ge_wall_2"></div>
+            <div class="ge_wall_1"></div>
+            <input type="password" placeholder="当前密码"/>
+            <div class="ge_wall_1"></div>
+            <input type="password" placeholder="新密码"/>
+            <div class="ge_wall_1"></div>
+            <input type="password" placeholder="确认新密码"/>
+            <p class="miaoShu">如果您的密码包括大写字母，必须在每次登录时以相同方式键入。</p>
+            <a href="#">如何创建强密码</a>
+            <br/><br/>
+            <input type="text" placehoder="键入密码提示"/>
+            <p class="miaoShu">所有使用这台计算机得人都可以看见密码提示。</p>
+            <a href="#">密码提示是什么？</a>
+        </div>
+        <div class="bottom">
+            <input type="submit" value="更改密码"/> <input type="button" value="取消">
+        </div>
+    </div>
+    <div class="onbutton">
+        <ul>
+            <li class='Minimization' onclick="min(this)"><a href="#"></a></li>
+            <li class='Reduction' onclick="Reduction(this)"><a href="#"></a></li>
+            <li class='Close' onclick="Close(this)"><a href="#"></a></li>
+        </ul>
+    </div>
+</div>
+<!--用户账户-更改密码-->
+
+
+<!--用户账户-删除密码-->
+<div id="user_pWd_del" class="moveBar" name="windows">
+    <div id="user_pWd_del_banner"></div>
+    <div class='windows_lt'></div>
+    <div class='windows_rt'></div>
+    <div class='windows_lb'></div>
+    <div class='windows_rb'></div>
+    <div class="windows_shadow"></div>
+    <div class="Goback">
+        <ul>
+            <li class='go'></li>
+            <li class='back'></li>
+        </ul>
+    </div>
+    <div class="address_bar">
+        <input name="network_txt" type="text" value="用户账户和家庭安全" id="userCounter_txt"/>
+    </div>
+    <div class="Search_bar">
+        <input name="Search_network_txt" type="text" value="搜索控制面板" id="Search_control_panel"/></div>
+    <div id="Content">
+        <div class="top_part">
+            <ul class="top_u">
+                <li>文件(F)</li>
+                <li>编辑(E)</li>
+                <li>查看(V)</li>
+                <li>工具(T)</li>
+                <li>帮助(H)</li>
+            </ul>
+        </div>
+        <div class="main_part">
+            <p class="p1">删除密码</p>
+            <img src="images/Jane.png"/>
+            <div class="ge_wall_2"></div>
+            <p>确实要删除您的密码吗？</p>
+            <div class="ge_wall_2"></div>
+            <input type="password" placeholder="当前密码"/>
+            <div class="bottom">
+                <input type="submit" value="删除密码"/> <input type="button" value="取消">
+            </div>
+        </div>
+        <div class="onbutton">
+            <ul>
+                <li class='Minimization' onclick="min(this)"><a href="#"></a></li>
+                <li class='Reduction' onclick="Reduction(this)"><a href="#"></a></li>
+                <li class='Close' onclick="Close(this)"><a href="#"></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!--用户账户-删除密码-->
+
+
+<!--更改图片-->
+<div id="user_gaiTu" class="moveBar" name="windows">
+    <div id="user_gaiTu_banner"></div>
+    <div class='windows_lt'></div>
+    <div class='windows_rt'></div>
+    <div class='windows_lb'></div>
+    <div class='windows_rb'></div>
+    <div class="windows_shadow"></div>
+    <div class="Goback">
+        <ul>
+            <li class='go'></li>
+            <li class='back'></li>
+        </ul>
+    </div>
+    <div class="address_bar">
+        <input name="network_txt" type="text" value="用户账户和家庭安全" id="userCounter_txt"/>
+    </div>
+    <div class="Search_bar">
+        <input name="Search_network_txt" type="text" value="搜索控制面板" id="Search_control_panel"/></div>
+    <div id="Content">
+        <div class="top_part">
+            <ul class="top_u">
+                <li>文件(F)</li>
+                <li>编辑(E)</li>
+                <li>查看(V)</li>
+                <li>工具(T)</li>
+                <li>帮助(H)</li>
+            </ul>
+        </div>
+        <div class="main_part">
+            <p class="p1">为您的账户选择一个新图片</p>
+            <img src="images/Jane.png" alt="Hello,Bye!"/>
+            <p>您悬着的图片将显示在欢迎屏幕和「开始」 菜单上</p>
+            <img src="images/选择图片.png"/>
+            <p><a href="#">浏览更多图片...</a></p>
+        </div>
+        <div class="bottom">
+            <input type="submit" value="更改图片"/> <input type="button" value="取消">
+        </div>
+    </div>
+    <div class="onbutton">
+        <ul>
+            <li class='Minimization' onclick="min(this)"><a href="#"></a></li>
+            <li class='Reduction' onclick="Reduction(this)"><a href="#"></a></li>
+            <li class='Close' onclick="Close(this)"><a href="#"></a></li>
+        </ul>
+    </div>
+</div>
+<!--更改图片-->
+
+
+
+<!--<div class="navigation_pane" >-->
+
+    <!--<div class="left_main">-->
+        <!--<div class="leftblankline"></div>-->
+        <!--<div class="leftbox">-->
+            <!--<div class="leftbox_t"></div>-->
+            <!--<div class="leftbox_title"><a href="#" onclick="showmenu(1);"><img src="images/Collection.png"  align ="left" height="16" width="16" />收藏夹</a></div>-->
+            <!--<div class="leftbox_m" id="menu1">-->
+                <!--<div class="leftbox" style="padding-left: 16px;">-->
+                    <!--<div class="leftbox_t"></div>-->
+                    <!--<div class="leftbox_title"><a href="#" onclick=""><img src="images/Collection.png"  align ="left" height="16" width="16" />收藏夹</a></div>-->
+                    <!--<div class="leftbox_m" id="menu1">                    </div>-->
+                <!--</div>-->
+                <!--<div class="leftbox" style="padding-left: 32px;">-->
+                    <!--<div class="leftbox_t"></div>-->
+                    <!--<div class="leftbox_title"><a href="#" onclick=""><img src="images/Collection.png"  align ="left" height="16" width="16" />收藏夹</a></div>-->
+                    <!--<div class="leftbox_m" id="menu1">                    </div>-->
+                <!--</div>-->
+                <!--<div class="leftbox" style="padding-left: 48px;">-->
+                    <!--<div class="leftbox_t"></div>-->
+                    <!--<div class="leftbox_title"><a href="#" onclick=""><img src="images/Collection.png"  align ="left" height="16" width="16" />收藏夹</a></div>-->
+                    <!--<div class="leftbox_m" id="menu1">                    </div>-->
+                <!--</div>-->
+
+                    <!--&lt;!&ndash;<ul>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<li><img src="images/Download.png"  align ="left" height="16" width="16" />下载</li>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<li><img src="images/Desktop.png"  align ="left" height="16" width="16" />桌面</li>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<li><img src="images/Recently.png"  align ="left" height="16" width="16" />最近访问的位置</li>&ndash;&gt;-->
+                <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+
+
+
+
+<!--屏保-->
+<div id="outContainer" style="display: none;">
+
+    <div id="container"></div   >
+    <div id="menu">
+        <button id="exitSp" style="position: absolute;left: 40%;top: -770px;z-index: 1000">退出屏保</button>
+        <button id="table" style="display: none">TABLE</button>
+        <button id="sphere" style="display: none">SPHERE</button>
+        <button id="helix" style="display: none">HELIX</button>
+        <button id="grid" style="display: none">GRID</button>
+    </div>
+</div>
+<script>
+    var table = [
+        "H", "Hydrogen", "1.00794", 1, 1,
+        "He", "Helium", "4.002602", 18, 1,
+        "Li", "Lithium", "6.941", 1, 2,
+        "Be", "Beryllium", "9.012182", 2, 2,
+        "B", "Boron", "10.811", 13, 2,
+        "C", "Carbon", "12.0107", 14, 2,
+        "N", "Nitrogen", "14.0067", 15, 2,
+        "O", "Oxygen", "15.9994", 16, 2,
+        "F", "Fluorine", "18.9984032", 17, 2,
+        "Ne", "Neon", "20.1797", 18, 2,
+        "Na", "Sodium", "22.98976...", 1, 3,
+        "Mg", "Magnesium", "24.305", 2, 3,
+        "Al", "Aluminium", "26.9815386", 13, 3,
+        "Si", "Silicon", "28.0855", 14, 3,
+        "P", "Phosphorus", "30.973762", 15, 3,
+        "S", "Sulfur", "32.065", 16, 3,
+        "Cl", "Chlorine", "35.453", 17, 3,
+        "Ar", "Argon", "39.948", 18, 3,
+        "K", "Potassium", "39.948", 1, 4,
+        "Ca", "Calcium", "40.078", 2, 4,
+        "Sc", "Scandium", "44.955912", 3, 4,
+        "Ti", "Titanium", "47.867", 4, 4,
+        "V", "Vanadium", "50.9415", 5, 4,
+        "Cr", "Chromium", "51.9961", 6, 4,
+        "Mn", "Manganese", "54.938045", 7, 4,
+        "Fe", "Iron", "55.845", 8, 4,
+        "Co", "Cobalt", "58.933195", 9, 4,
+        "Ni", "Nickel", "58.6934", 10, 4,
+        "Cu", "Copper", "63.546", 11, 4,
+        "Zn", "Zinc", "65.38", 12, 4,
+        "Ga", "Gallium", "69.723", 13, 4,
+        "Ge", "Germanium", "72.63", 14, 4,
+        "As", "Arsenic", "74.9216", 15, 4,
+        "Se", "Selenium", "78.96", 16, 4,
+        "Br", "Bromine", "79.904", 17, 4,
+        "Kr", "Krypton", "83.798", 18, 4,
+        "Rb", "Rubidium", "85.4678", 1, 5,
+        "Sr", "Strontium", "87.62", 2, 5,
+        "Y", "Yttrium", "88.90585", 3, 5,
+        "Zr", "Zirconium", "91.224", 4, 5,
+        "Nb", "Niobium", "92.90628", 5, 5,
+        "Mo", "Molybdenum", "95.96", 6, 5,
+        "Tc", "Technetium", "(98)", 7, 5,
+        "Ru", "Ruthenium", "101.07", 8, 5,
+        "Rh", "Rhodium", "102.9055", 9, 5,
+        "Pd", "Palladium", "106.42", 10, 5,
+        "Ag", "Silver", "107.8682", 11, 5,
+        "Cd", "Cadmium", "112.411", 12, 5,
+        "In", "Indium", "114.818", 13, 5,
+        "Sn", "Tin", "118.71", 14, 5,
+        "Sb", "Antimony", "121.76", 15, 5,
+        "Te", "Tellurium", "127.6", 16, 5,
+        "I", "Iodine", "126.90447", 17, 5,
+        "Xe", "Xenon", "131.293", 18, 5,
+        "Cs", "Caesium", "132.9054", 1, 6,
+        "Ba", "Barium", "132.9054", 2, 6,
+        "La", "Lanthanum", "138.90547", 4, 9,
+        "Ce", "Cerium", "140.116", 5, 9,
+        "Pr", "Praseodymium", "140.90765", 6, 9,
+        "Nd", "Neodymium", "144.242", 7, 9,
+        "Pm", "Promethium", "(145)", 8, 9,
+        "Sm", "Samarium", "150.36", 9, 9,
+        "Eu", "Europium", "151.964", 10, 9,
+        "Gd", "Gadolinium", "157.25", 11, 9,
+        "Tb", "Terbium", "158.92535", 12, 9,
+        "Dy", "Dysprosium", "162.5", 13, 9,
+        "Ho", "Holmium", "164.93032", 14, 9,
+        "Er", "Erbium", "167.259", 15, 9,
+        "Tm", "Thulium", "168.93421", 16, 9,
+        "Yb", "Ytterbium", "173.054", 17, 9,
+        "Lu", "Lutetium", "174.9668", 18, 9,
+        "Hf", "Hafnium", "178.49", 4, 6,
+        "Ta", "Tantalum", "180.94788", 5, 6,
+        "W", "Tungsten", "183.84", 6, 6,
+        "Re", "Rhenium", "186.207", 7, 6,
+        "Os", "Osmium", "190.23", 8, 6,
+        "Ir", "Iridium", "192.217", 9, 6,
+        "Pt", "Platinum", "195.084", 10, 6,
+        "Au", "Gold", "196.966569", 11, 6,
+        "Hg", "Mercury", "200.59", 12, 6,
+        "Tl", "Thallium", "204.3833", 13, 6,
+        "Pb", "Lead", "207.2", 14, 6,
+        "Bi", "Bismuth", "208.9804", 15, 6,
+        "Po", "Polonium", "(209)", 16, 6,
+        "At", "Astatine", "(210)", 17, 6,
+        "Rn", "Radon", "(222)", 18, 6,
+        "Fr", "Francium", "(223)", 1, 7,
+        "Ra", "Radium", "(226)", 2, 7,
+        "Ac", "Actinium", "(227)", 4, 10,
+        "Th", "Thorium", "232.03806", 5, 10,
+        "Pa", "Protactinium", "231.0588", 6, 10,
+        "U", "Uranium", "238.02891", 7, 10,
+        "Np", "Neptunium", "(237)", 8, 10,
+        "Pu", "Plutonium", "(244)", 9, 10,
+        "Am", "Americium", "(243)", 10, 10,
+        "Cm", "Curium", "(247)", 11, 10,
+        "Bk", "Berkelium", "(247)", 12, 10,
+        "Cf", "Californium", "(251)", 13, 10,
+        "Es", "Einstenium", "(252)", 14, 10,
+        "Fm", "Fermium", "(257)", 15, 10,
+        "Md", "Mendelevium", "(258)", 16, 10,
+        "No", "Nobelium", "(259)", 17, 10,
+        "Lr", "Lawrencium", "(262)", 18, 10,
+        "Rf", "Rutherfordium", "(267)", 4, 7,
+        "Db", "Dubnium", "(268)", 5, 7,
+        "Sg", "Seaborgium", "(271)", 6, 7,
+        "Bh", "Bohrium", "(272)", 7, 7,
+        "Hs", "Hassium", "(270)", 8, 7,
+        "Mt", "Meitnerium", "(276)", 9, 7,
+        "Ds", "Darmstadium", "(281)", 10, 7,
+        "Rg", "Roentgenium", "(280)", 11, 7,
+        "Cn", "Copernicium", "(285)", 12, 7,
+        "Uut", "Unutrium", "(284)", 13, 7,
+        "Fl", "Flerovium", "(289)", 14, 7,
+        "Uup", "Ununpentium", "(288)", 15, 7,
+        "Lv", "Livermorium", "(293)", 16, 7,
+        "Uus", "Ununseptium", "(294)", 17, 7,
+        "Uuo", "Ununoctium", "(294)", 18, 7
+    ];
+    var camera, scene, renderer;
+    var controls;
+    var objects = [];
+    var targets = { table: [], sphere: [], helix: [], grid: [] };
+    init();
+    animate();
+    function init() {
+        camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 10000 );
+        camera.position.z = 3000;
+        scene = new THREE.Scene();
+        // table
+        for ( var i = 0; i < table.length; i += 5 ) {
+            var element = document.createElement( 'div' );
+            element.className = 'element';
+            element.style.backgroundColor = 'rgba(0,127,127,' + ( Math.random() * 0.5 + 0.25 ) + ')';
+            var number = document.createElement( 'div' );
+            number.className = 'number';
+            number.textContent = (i/5) + 1;
+            element.appendChild( number );
+            var symbol = document.createElement( 'div' );
+            symbol.className = 'symbol';
+            symbol.textContent = table[ i ];
+            element.appendChild( symbol );
+            var details = document.createElement( 'div' );
+            details.className = 'details';
+            details.innerHTML = table[ i + 1 ] + '<br>' + table[ i + 2 ];
+            element.appendChild( details );
+            var object = new THREE.CSS3DObject( element );
+            object.position.x = Math.random() * 4000 - 2000;
+            object.position.y = Math.random() * 4000 - 2000;
+            object.position.z = Math.random() * 4000 - 2000;
+            scene.add( object );
+            objects.push( object );
+            //
+            var object = new THREE.Object3D();
+            object.position.x = ( table[ i + 3 ] * 140 ) - 1330;
+            object.position.y = - ( table[ i + 4 ] * 180 ) + 990;
+            targets.table.push( object );
+        }
+        // sphere
+        var vector = new THREE.Vector3();
+        var spherical = new THREE.Spherical();
+        for ( var i = 0, l = objects.length; i < l; i ++ ) {
+            var phi = Math.acos( -1 + ( 2 * i ) / l );
+            var theta = Math.sqrt( l * Math.PI ) * phi;
+            var object = new THREE.Object3D();
+            spherical.set( 800, phi, theta );
+            object.position.setFromSpherical( spherical );
+            vector.copy( object.position ).multiplyScalar( 2 );
+            object.lookAt( vector );
+            targets.sphere.push( object );
+        }
+        // helix
+        var vector = new THREE.Vector3();
+        var cylindrical = new THREE.Cylindrical();
+        for ( var i = 0, l = objects.length; i < l; i ++ ) {
+            var theta = i * 0.175 + Math.PI;
+            var y = - ( i * 8 ) + 450;
+            var object = new THREE.Object3D();
+            cylindrical.set( 900, theta, y );
+            object.position.setFromCylindrical( cylindrical );
+            vector.x = object.position.x * 2;
+            vector.y = object.position.y;
+            vector.z = object.position.z * 2;
+            object.lookAt( vector );
+            targets.helix.push( object );
+        }
+        // grid
+        for ( var i = 0; i < objects.length; i ++ ) {
+            var object = new THREE.Object3D();
+            object.position.x = ( ( i % 5 ) * 400 ) - 800;
+            object.position.y = ( - ( Math.floor( i / 5 ) % 5 ) * 400 ) + 800;
+            object.position.z = ( Math.floor( i / 25 ) ) * 1000 - 2000;
+            targets.grid.push( object );
+        }
+        //
+        renderer = new THREE.CSS3DRenderer();
+        renderer.setSize( window.innerWidth, window.innerHeight );
+        renderer.domElement.style.position = 'absolute';
+        renderer.domElement.style.zIndex = 999;
+        document.getElementById( 'container' ).appendChild( renderer.domElement );
+        //
+        controls = new THREE.TrackballControls( camera, renderer.domElement );
+        controls.rotateSpeed = 0.5;
+        controls.minDistance = 500;
+        controls.maxDistance = 6000;
+        controls.addEventListener( 'change', render );
+        var button = document.getElementById( 'table' );
+        button.addEventListener( 'click', function ( event ) {
+            transform( targets.table, 2000 );
+        }, false );
+        var button = document.getElementById( 'sphere' );
+        button.addEventListener( 'click', function ( event ) {
+            transform( targets.sphere, 2000 );
+        }, false );
+        var button = document.getElementById( 'helix' );
+        button.addEventListener( 'click', function ( event ) {
+            transform( targets.helix, 2000 );
+        }, false );
+        var button = document.getElementById( 'grid' );
+        button.addEventListener( 'click', function ( event ) {
+            transform( targets.grid, 2000 );
+        }, false );
+        transform( targets.table, 2000 );
+        //
+        window.addEventListener( 'resize', onWindowResize, false );
+    }
+    function transform( targets, duration ) {
+        TWEEN.removeAll();
+        for ( var i = 0; i < objects.length; i ++ ) {
+            var object = objects[ i ];
+            var target = targets[ i ];
+            new TWEEN.Tween( object.position )
+                .to( { x: target.position.x, y: target.position.y, z: target.position.z }, Math.random() * duration + duration )
+                .easing( TWEEN.Easing.Exponential.InOut )
+                .start();
+            new TWEEN.Tween( object.rotation )
+                .to( { x: target.rotation.x, y: target.rotation.y, z: target.rotation.z }, Math.random() * duration + duration )
+                .easing( TWEEN.Easing.Exponential.InOut )
+                .start();
+        }
+        new TWEEN.Tween( this )
+            .to( {}, duration * 2 )
+            .onUpdate( render )
+            .start();
+    }
+    function onWindowResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize( window.innerWidth, window.innerHeight );
+        render();
+    }
+    function animate() {
+        requestAnimationFrame( animate );
+        TWEEN.update();
+        controls.update();
+    }
+    function render() {
+        renderer.render( scene, camera );
+    }
+</script>
+<!--/屏保-->
+
+
+<script>
+    var prevX,changingX,spFlag = true,interval;
+    $("#win").on("mousemove",function (e) {
+        changingX = e.clientX;
+
+    });
+    function callSp() {
+        setTimeout(function () {
+            $("#table").trigger("click");
+        },0);
+        setTimeout(function () {
+            $("#sphere").trigger("click");
+        },5000);
+        setTimeout(function () {
+            $("#helix").trigger("click");
+        },10000);
+        setTimeout(function () {
+            $("#grid").trigger("click");
+        },15000);
+    }
+    setInterval(function () {
+        if(prevX == changingX){
+            $("#outContainer").css("display","block");
+            $(document.body).css("background-color","#000");
+            if(spFlag) {
+                callSp();
+                interval = setInterval(function () {
+                    callSp()
+                }, 20000);
+            }
+            spFlag = false;
+        }
+        console.log(prevX+"   "+changingX)
+         if(prevX != changingX) {
+            $("#outContainer").css("display", "none");
+        }
+        prevX = changingX;
+    },60000);
+    $("#exitSp").on("click",function (e) {
+        clearInterval(interval);
+        $("#outContainer").css("display","none");
+        spFlag = true;
+        e.stopPropagation?e.stopPropagation() : e.cancelBubble = true;
+    })
+</script>
+
+</body>
+<script src="js/createWin.js"></script>
+<script src="js/desktopIcon.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+
+</html>

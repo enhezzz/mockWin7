@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script> 
+
+var a_i=30;
+var p=20;
+var Trace_ad=0;
+var zsccc=""
+var tArray = new Array();   //先声明一维
+for(var k=0;k<a_i;k++){ //一维长度为i,i为变量，可以根据实际情况改变
+ tArray[k]=new Array(); //声明二维，每一个一维数组里面的一个元素都是一个数组；
+for(var j=0;j<p;j++){ //一维数组里面每个元素数组可以包含的数量p，p也是一个变量；
+  tArray[k][j]=""; //这里将变量初始化，我这边统一初始化为空，后面在用所需的值覆盖里面的值
+ }
+}
+var Trace = new Array();   //先声明一维
+for(var k=0;k<20;k++){ //一维长度为i,i为变量，可以根据实际情况改变
+ Trace[k]=new Array(); //声明二维，每一个一维数组里面的一个元素都是一个数组；
+}
+//Trace[0]="Root";
+var Current_address="Root";
+var Before_address=""
+var next_address=""
+tArray[0][1]="Root_c";
+tArray[0][2]="Root";
+tArray[0][3]="C盘";
+tArray[0][4]="Q";
+tArray[0][5]="2014-8-10";
+tArray[0][6]="2014-8-10";
+tArray[0][7]="2014-8-10";
+tArray[0][8]="12GB";
+tArray[0][9]="8GB";
+tArray[0][10]="Windows";
+tArray[0][11]="none";
+
+tArray[1][1]="Root_d";
+tArray[1][2]="Root";
+tArray[1][3]="D盘";
+tArray[1][4]="Q";
+tArray[1][5]="2014-8-10";
+tArray[1][6]="2014-8-10";
+tArray[1][7]="2014-8-10";
+tArray[1][8]="12GB";
+tArray[1][9]="8GB";
+tArray[1][10]="Windows";
+tArray[1][11]="block";
+
+tArray[2][1]="Root_e";
+tArray[2][2]="Root";
+tArray[2][3]="E盘";
+tArray[2][4]="Q";
+tArray[2][5]="2014-8-10";
+tArray[2][6]="2014-8-10";
+tArray[2][7]="2014-8-10";
+tArray[2][8]="12GB";
+tArray[2][9]="8GB";
+tArray[2][10]="Windows";
+tArray[2][11]="block";
+
+
+tArray[3][1]="c1";
+tArray[3][2]="Root_c";
+tArray[3][3]="cc";
+tArray[3][4]="D";
+tArray[3][5]="2014-8-10";
+tArray[3][6]="2014-8-10";
+tArray[3][7]="2014-8-10";
+tArray[3][8]="12GB";
+tArray[3][9]="8GB";
+tArray[3][10]="Windows";
+tArray[3][11]="block";
+
+tArray[4][1]="E1";
+tArray[4][2]="d1";
+tArray[4][3]="ee";
+tArray[4][4]="D";
+tArray[4][5]="2014-8-10";
+tArray[4][6]="2014-8-10";
+tArray[4][7]="2014-8-10";
+tArray[4][8]="12GB";
+tArray[4][9]="8GB";
+tArray[4][10]="Windows";
+tArray[4][11]="block";
+
+tArray[5][1]="d1";
+tArray[5][2]="Root_d";
+tArray[5][3]="dd";
+tArray[5][4]="D";
+tArray[5][5]="2014-8-10";
+tArray[5][6]="2014-8-10";
+tArray[5][7]="2014-8-10";
+tArray[5][8]="12GB";
+tArray[5][9]="8GB";
+tArray[5][10]="Windows";
+tArray[5][11]="block";
+
+tArray[6][1]="dd1";
+tArray[6][2]="d1";
+tArray[6][3]="d三级目录";
+tArray[6][4]="D";
+tArray[6][5]="2014-8-10";
+tArray[6][6]="2014-8-10";
+tArray[6][7]="2014-8-10";
+tArray[6][8]="12GB";
+tArray[6][9]="8GB";
+tArray[6][10]="Windows";
+tArray[6][11]="block";
+
+tArray[7][1]="dd2";
+tArray[7][2]="dd1";
+tArray[7][3]="d四级目录";
+tArray[7][4]="D";
+tArray[7][5]="2014-8-10";
+tArray[7][6]="2014-8-10";
+tArray[7][7]="2014-8-10";
+tArray[7][8]="12GB";
+tArray[7][9]="8GB";
+tArray[7][10]="Windows";
+tArray[7][11]="block";
+
+tArray[8][1]="d2";
+tArray[8][2]="Root_d";
+tArray[8][3]="d的第二个文件夹";
+tArray[8][4]="D del";
+tArray[8][5]="2014-8-10";
+tArray[8][6]="2014-8-10";
+tArray[8][7]="2014-8-10";
+tArray[8][8]="12GB";
+tArray[8][9]="8GB";
+tArray[8][10]="Windows";
+tArray[8][11]="block";
+
+
+var data_size=8;
+
+function sayHello(e){ 
+
+ //alert("hello"); 
+ for(var i=0;i<=data_size;i++){
+alert(i);
+   if(tArray[i][2]==e){
+   alert(i+tArray[i][2]);
+   sayHello(tArray[i][1]);
+   
+   }
+ }
+} 
+// sayHello("Root_d");
+ var data_size=8;
+ tArray[8][1]="d2";
+tArray[8][2]="Root_d";
+tArray[8][3]="d的第二个文件夹";
+tArray[8][4]="D del";
+tArray[8][5]="2014-8-10";
+tArray[8][6]="2014-8-10";
+tArray[8][7]="2014-8-10";
+tArray[8][8]="12GB";
+tArray[8][9]="8GB";
+tArray[8][10]="Windows";
+tArray[8][11]="block";
+
+function  Looking_lower(dq,yuan){ 
+ for(var x=0;x<=data_size;x++){
+   if(tArray[x][1]==dq){
+     if (tArray[x][2]==yuan){
+         return 1;
+	     break; 
+        }else{
+           if (Looking_lower(tArray[x][2],yuan)==1){
+           return 1;
+           break; 
+           }
+	 }
+   }
+ }
+    return 0;
+} 
+
+
+
+alert(Looking_lower("dd1","d1"));
+ 
+ 
+
+ </script> 
+</head>
+
+<body>
+</body>
+</html>
